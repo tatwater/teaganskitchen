@@ -1,14 +1,11 @@
 import withApollo from '../../lib/withApollo';
 
-import Navbar from '../../components/navbar/Navbar';
-import Header from '../../components/recipe/header';
-import Photo from '../../components/recipe/photo';
+import GlobalLayout from '../../layouts/GlobalLayout';
+import Header from '../../components/recipe/header/Header';
 
 
 export default withApollo(() => (
-  <div>
-    <Navbar />
+  <GlobalLayout>
     <Header />
-    <Photo />
-  </div>
+  </GlobalLayout>
 ));

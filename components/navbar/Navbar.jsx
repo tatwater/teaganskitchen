@@ -7,8 +7,9 @@ import { openMainNav } from '../../lib/main-nav/actions';
 
 import Logo from './Logo';
 import MainNav from './main-nav/MainNav';
+import UserMenu from './user-menu/UserMenu';
 
-import { Container, Home, ToggleButton, SubNav, A, Site } from './styles';
+import { Container, Home, ToggleButton, SubNav, A, Site, Photo } from './styles';
 
 
 function Navbar({ router: { pathname }, visible, dispatch }) {
@@ -46,6 +47,9 @@ function Navbar({ router: { pathname }, visible, dispatch }) {
           <Link href='/yoga'>
             <Site site='yoga'>Yoga</Site>
           </Link>
+        }
+        { (homePath === '/kitchen' || homePath === '/yoga') &&
+          <UserMenu homePath={ homePath } />
         }
         { homePath === '/kitchen' &&
           <Link href='/party'>

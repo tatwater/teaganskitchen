@@ -137,7 +137,6 @@ export const SocialItem = styled.div`
   transition: border-color .2s ease;
 
   a {
-    color: inherit;
     display: flex;
       align-items: center;
     padding: 20px 30px;
@@ -146,7 +145,6 @@ export const SocialItem = styled.div`
       right: 0;
       bottom: 0;
       left: 0;
-    text-decoration: none;
   }
   svg {
     height: 24px;

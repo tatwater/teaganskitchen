@@ -1,0 +1,13 @@
+type User {
+  id: ID! @id
+  name: String!
+}
+type Ingredient {
+  id: ID! @id
+  name: String!
+}
+type Recipe {
+  id: ID! @id
+  name: String!
+  url: String! @unique
+}

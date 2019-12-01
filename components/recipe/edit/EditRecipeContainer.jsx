@@ -3,23 +3,17 @@ import { withRouter } from 'next/router';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import EditRecipe from './EditRecipe';
 
-function Header({ router: { asPath }, data: { error, recipe } }) {
+
+function EditRecipeContainer({ router: { asPath }, data: { error, recipe } }) {
   if (error)
     return (
       <div>Error retrieving recipe { console.log(error) }</div>
     );
   if (recipe)
     return (
-      <header>
-        <h1>{ recipe.name }</h1>
-        <p>
-          URL: { recipe.url }
-        </p>
-        <Link href={ '/recipe/edit/' + recipe.url }>
-          <a>Edit</a>
-        </Link>
-      </header>
+      <EditRecipe recipe={ recipe } />
     );
   return (
     <div>Loading</div>
@@ -45,6 +39,6 @@ const ComponentWithMutation = graphql(recipe, {
   props: ({ data }) => ({
     data,
   }),
-})(Header);
+})(EditRecipeContainer);
 
 export default withRouter(ComponentWithMutation);

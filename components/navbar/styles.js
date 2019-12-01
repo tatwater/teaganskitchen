@@ -47,7 +47,7 @@ export const Site = styled.a`
     align-items: center;
   font-weight: 600;
   height: 24px;
-  margin: 0 18px 0 14px;
+  margin: 0 4px 0 14px;
   padding: 1px 8px 0;
 `;
 export const SubNav = styled.div`
@@ -56,17 +56,19 @@ export const SubNav = styled.div`
 `;
 export const A = styled.a`
   background: ${({ current, theme }) => current ? theme.colors.linkActive : 'transparent' };
+  border: 2px solid transparent;
   border-radius: 3px;
   cursor: pointer;
   display: flex;
     align-items: center;
   font-weight: 500;
   height: 32px;
-  padding: 2px 12px 0;
-  transition: background .1s ease;
+  padding: 2px 10px 0;
+  transition: background .1s ease, border-color .1s ease;
 
   &:hover {
     background: ${({ current, theme }) => current ? 'transparent' : theme.colors.linkActive };
+    border-color: ${({ current, theme }) => current && theme.colors.linkActive };
   }
 
   & + a {

@@ -41,6 +41,11 @@ export const GlobalStyle = createGlobalStyle`
     width: 100vw;
   }
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   button {
     background: none;
     border: none;
