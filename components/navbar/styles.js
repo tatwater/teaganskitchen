@@ -56,7 +56,7 @@ export const Site = styled.a`
   font-weight: 600;
   height: 24px;
   margin: 0 4px 0 14px;
-  padding: 1px 8px 0;
+  padding: 2px 8px 0;
 `;
 export const SubNav = styled.div`
   display: flex;

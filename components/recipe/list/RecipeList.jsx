@@ -1,6 +1,12 @@
+import Link from 'next/link';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Error from './empty/Error';
+import Loading from './empty/Loading';
+import NoResults from './empty/NoResults';
+
+import { Container, Track, Item, Photo, Title, Description } from './styles';
 
 
 const RECIPES_PER_PAGE = 10;
@@ -8,40 +14,39 @@ const RECIPES_PER_PAGE = 10;
 function RecipeList({ data: { error, recipes, loading }, typeFilters, loadMoreRecipes }) {
   if (error)
     return (
-      <div>Error loading recipes { console.log(error) }</div>
+      <Error>{ console.log(error) }</Error>
     );
   if (recipes && recipes.length) {
     const areMoreRecipes = false;
 
     return (
-      <section>
-        <ul>
+      <Container>
+        <h1>All recipes</h1>
+        <Track>
           { recipes.map((recipe, index) => (
-            <li key={recipe.id}>
-              <div>
-                <a href={`/recipe/${recipe.url}`}>
-                  { recipe.name }
-                  <br />
-                  { recipe.type }
-                </a>
-              </div>
-            </li>
+            <Link href={`/recipe/${recipe.url}`} key={ recipe.id }>
+              <Item>
+                <Photo>Photo coming soon</Photo>
+                <Title>{ recipe.name }</Title>
+                <Description>{ recipe.type }</Description>
+              </Item>
+            </Link>
           ))}
-        </ul>
-        { areMoreRecipes &&
-          <button onClick={() => loadMoreRecipes()}>
-            { loading ? 'Loading...' : 'Show More' }
-          </button>
-        }
-      </section>
+          { areMoreRecipes &&
+            <button onClick={() => loadMoreRecipes()}>
+              { loading ? 'Loading...' : 'Show More' }
+            </button>
+          }
+        </Track>
+      </Container>
     )
   }
   if (recipes) {
     return (
-      <div>No { typeFilters[0] } recipes to display</div>
+      <NoResults type={ typeFilters[0] } />
     )
   }
-  return <div>Loading</div>
+  return <Loading />
 }
 
 export const recipes = gql`
