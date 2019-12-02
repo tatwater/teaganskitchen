@@ -2,35 +2,38 @@ import { withRouter } from 'next/router';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import EditRecipe from './EditRecipe';
+import EditEvent from './EditEvent';
 
 
-function EditRecipeContainer({ data: { error, recipe } }) {
+function EditEventContainer({ data: { error, event } }) {
   if (error)
     return (
-      <div>Error retrieving recipe { console.log(error) }</div>
+      <div>Error retrieving event { console.log(error) }</div>
     );
-  if (recipe)
+  if (event)
     return (
-      <EditRecipe recipe={ recipe } />
+      <EditEvent event={ event } />
     );
   return (
     <div>Loading</div>
   );
 }
 
-const recipe = gql`
-  query recipe($id: String!) {
-    recipe(where: { url: $id }) {
+const event = gql`
+  query event($id: String!) {
+    event(where: { url: $id }) {
       id
       name
       url
-      type
+      starred
+      description
+      startTime
+      endTime
     }
   }
 `;
 
-const ComponentWithMutation = graphql(recipe, {
+const ComponentWithMutation = graphql(event, {
   options: ({ router: { query } }) => ({
     variables: {
       id: query.id,
@@ -39,6 +42,6 @@ const ComponentWithMutation = graphql(recipe, {
   props: ({ data }) => ({
     data,
   }),
-})(EditRecipeContainer);
+})(EditEventContainer);
 
 export default withRouter(ComponentWithMutation);

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const RECIPES_PER_PAGE = 10;
 
-function RecipeList({ data: { error, recipes, loading }, loadMoreRecipes }) {
+function RecipeList({ data: { error, recipes, loading }, typeFilters, loadMoreRecipes }) {
   if (error)
     return (
       <div>Error loading recipes { console.log(error) }</div>
@@ -20,7 +20,9 @@ function RecipeList({ data: { error, recipes, loading }, loadMoreRecipes }) {
             <li key={recipe.id}>
               <div>
                 <a href={`/recipe/${recipe.url}`}>
-                  {recipe.name}
+                  { recipe.name }
+                  <br />
+                  { recipe.type }
                 </a>
               </div>
             </li>
@@ -34,15 +36,21 @@ function RecipeList({ data: { error, recipes, loading }, loadMoreRecipes }) {
       </section>
     )
   }
+  if (recipes) {
+    return (
+      <div>No { typeFilters[0] } recipes to display</div>
+    )
+  }
   return <div>Loading</div>
 }
 
 export const recipes = gql`
-  query recipes($first: Int!, $skip: Int!) {
-    recipes(orderBy: name_ASC, first: $first, skip: $skip) {
+  query recipes($first: Int!, $skip: Int!, $type_in: [String!]) {
+    recipes(where: { type_in: $type_in }, orderBy: name_ASC, first: $first, skip: $skip) {
       id
       name
       url
+      type
     }
   }
 `;
@@ -53,9 +61,9 @@ export const allRecipesQueryVars = {
 }
 
 export default graphql(recipes, {
-  options: {
-    variables: allRecipesQueryVars,
-  },
+  options: ({ typeFilters=['main', 'side', 'bite', 'bread', 'dessert', 'drink'] }) => ({
+    variables: {...allRecipesQueryVars, type_in: typeFilters},
+  }),
   props: ({ data }) => ({
     data,
     loadMoreRecipes: () => {

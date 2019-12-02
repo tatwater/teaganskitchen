@@ -13,6 +13,7 @@ class EditRecipe extends Component {
     this.state = {
       name: '',
       url: '',
+      type: '',
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,6 +24,7 @@ class EditRecipe extends Component {
     this.setState({
       name: this.props.recipe.name,
       url: this.props.recipe.url,
+      type: this.props.recipe.type,
     })
   }
 
@@ -40,7 +42,8 @@ class EditRecipe extends Component {
 
     this.props.updateRecipe(this.props.recipe.id,
                             formData.get('name'),
-                            formData.get('url'));
+                            formData.get('url'),
+                            formData.get('type'));
     form.reset();
 
     this.props.router.push('/recipe/' + formData.get('url'));
@@ -51,21 +54,34 @@ class EditRecipe extends Component {
       <form onSubmit={(event) => this.handleSubmit(event) }>
         <h1>Edit Recipe</h1>
         <input
+          defaultValue={ this.state.name }
           name='name'
           onChange={(event) => this.handleChange(event) }
           placeholder='Name'
           required
           type='text'
-          defaultValue={ this.state.name }
         />
         <input
+          defaultValue={ this.state.url }
           name='url'
           onChange={(event) => this.handleChange(event) }
           placeholder='URL'
           required
           type='text'
-          defaultValue={ this.state.url }
         />
+        <select
+          name='type'
+          onChange={(event) => this.handleChange(event) }
+          required
+          value={ this.state.type }
+        >
+          <option value='main'>Main</option>
+          <option value='side'>Side</option>
+          <option value='bite'>Bite</option>
+          <option value='bread'>Bread</option>
+          <option value='dessert'>Dessert</option>
+          <option value='drink'>Drink</option>
+        </select>
         <button type='submit'>Save</button>
         <Delete />
       </form>
@@ -74,20 +90,21 @@ class EditRecipe extends Component {
 }
 
 const updateRecipe = gql`
-  mutation updateRecipe($id: ID!, $name: String!, $url: String!) {
-    updateRecipe(data: { name: $name, url: $url }, where: { id: $id }) {
+  mutation updateRecipe($id: ID!, $name: String!, $url: String!, $type: String!) {
+    updateRecipe(data: { name: $name, url: $url, type: $type }, where: { id: $id }) {
       id
       name
       url
+      type
     }
   }
 `;
 
 export default graphql(updateRecipe, {
   props: ({ mutate }) => ({
-    updateRecipe: (id, name, url) => {
+    updateRecipe: (id, name, url, type) => {
       mutate({
-        variables: { id, name, url },
+        variables: { id, name, url, type },
       });
     }
   }),

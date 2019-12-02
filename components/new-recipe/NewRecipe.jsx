@@ -2,8 +2,6 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withRouter } from 'next/router';
 
-import { recipes, allRecipesQueryVars } from '../recipe-list/RecipeList';
-
 
 function NewRecipe({ router, createRecipe }) {
   function handleSubmit(event) {
@@ -13,7 +11,8 @@ function NewRecipe({ router, createRecipe }) {
     const formData = new window.FormData(form);
 
     createRecipe(formData.get('name'),
-                 formData.get('url'));
+                 formData.get('url'),
+                 formData.get('type'));
     form.reset();
     
     router.push('/recipe/' + formData.get('url'));
@@ -34,41 +33,38 @@ function NewRecipe({ router, createRecipe }) {
         required
         type='text'
       />
+      <select
+        name='type'
+        required
+      >
+        <option value='main'>Main</option>
+        <option value='side'>Side</option>
+        <option value='bite'>Bite</option>
+        <option value='bread'>Bread</option>
+        <option value='dessert'>Dessert</option>
+        <option value='drink'>Drink</option>
+      </select>
       <button type='submit'>Save</button>
     </form>
   )
 }
 
 const createRecipe = gql`
-  mutation createRecipe($name: String!, $url: String!) {
-    createRecipe(data: { name: $name, url: $url }) {
+  mutation createRecipe($name: String!, $url: String!, $type: String!) {
+    createRecipe(data: { name: $name, url: $url, type: $type }) {
       id
       name
       url
+      type
     }
   }
 `;
 
 export default graphql(createRecipe, {
   props: ({ mutate }) => ({
-    createRecipe: (name, url) => {
+    createRecipe: (name, url, type) => {
       mutate({
-        variables: { name, url },
-        // update: (proxy, { data: { createRecipe } }) => {
-        //   const data = proxy.readQuery({
-        //     query: recipes,
-        //     variables: allRecipesQueryVars,
-        //   });
-
-        //   proxy.writeQuery({
-        //     query: recipes,
-        //     data: {
-        //       ...data,
-        //       recipes: [createRecipe, ...data.recipes],
-        //     },
-        //     variables: allRecipesQueryVars,
-        //   });
-        // },
+        variables: { name, url, type },
       })
     }
   }),

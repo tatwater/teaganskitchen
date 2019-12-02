@@ -25,20 +25,51 @@ export const GlobalStyle = createGlobalStyle`
     user-select: none;
   }
 
-  html {
-    height: 100vh;
-    overflow: hidden;
-    width: 100vw;
-  }
-
   body {
     color: ${({ theme }) => theme.colors.textPrimary };
     font-family: 'Sofia Pro';
     font-size: 18px;
     font-weight: 500;
     height: 100vh;
-    overflow: scroll;
+    padding-top: 96px;
     width: 100vw;
+  }
+
+  h1 {
+    font-size: 54px;
+    font-weight: 900;
+    margin: 0;
+  }
+  h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 0 0 66px 0;
+    position: relative;
+
+    &::after {
+      background: ${({ theme }) => theme.colors.yellow };
+      content: '';
+      height: 6px;
+      position: absolute;
+        bottom: -26px;
+        left: 0;
+      width: 80px;
+    }
+  }
+  h3 {
+    color: ${({ theme }) => theme.colors.brandPrimary };
+    font-size: 22px;
+    font-weight: 900;
+    margin: 0;
+  }
+
+  p {
+    line-height: 1.33em;
+    margin: 0;
+
+    & + p {
+      margin-top: 1em;
+    }
   }
 
   a {

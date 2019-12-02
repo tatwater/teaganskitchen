@@ -3,7 +3,15 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateIngredient {
+/* GraphQL */ `type AggregateEvent {
+  count: Int!
+}
+
+type AggregateIngredient {
+  count: Int!
+}
+
+type AggregateMeal {
   count: Int!
 }
 
@@ -17,6 +25,187 @@ type AggregateUser {
 
 type BatchPayload {
   count: Long!
+}
+
+scalar DateTime
+
+type Event {
+  id: ID!
+  name: String!
+  url: String!
+  starred: Boolean
+  description: String!
+  startTime: DateTime!
+  endTime: DateTime!
+}
+
+type EventConnection {
+  pageInfo: PageInfo!
+  edges: [EventEdge]!
+  aggregate: AggregateEvent!
+}
+
+input EventCreateInput {
+  id: ID
+  name: String!
+  url: String!
+  starred: Boolean
+  description: String!
+  startTime: DateTime!
+  endTime: DateTime!
+}
+
+type EventEdge {
+  node: Event!
+  cursor: String!
+}
+
+enum EventOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  url_ASC
+  url_DESC
+  starred_ASC
+  starred_DESC
+  description_ASC
+  description_DESC
+  startTime_ASC
+  startTime_DESC
+  endTime_ASC
+  endTime_DESC
+}
+
+type EventPreviousValues {
+  id: ID!
+  name: String!
+  url: String!
+  starred: Boolean
+  description: String!
+  startTime: DateTime!
+  endTime: DateTime!
+}
+
+type EventSubscriptionPayload {
+  mutation: MutationType!
+  node: Event
+  updatedFields: [String!]
+  previousValues: EventPreviousValues
+}
+
+input EventSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EventWhereInput
+  AND: [EventSubscriptionWhereInput!]
+  OR: [EventSubscriptionWhereInput!]
+  NOT: [EventSubscriptionWhereInput!]
+}
+
+input EventUpdateInput {
+  name: String
+  url: String
+  starred: Boolean
+  description: String
+  startTime: DateTime
+  endTime: DateTime
+}
+
+input EventUpdateManyMutationInput {
+  name: String
+  url: String
+  starred: Boolean
+  description: String
+  startTime: DateTime
+  endTime: DateTime
+}
+
+input EventWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  starred: Boolean
+  starred_not: Boolean
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  startTime: DateTime
+  startTime_not: DateTime
+  startTime_in: [DateTime!]
+  startTime_not_in: [DateTime!]
+  startTime_lt: DateTime
+  startTime_lte: DateTime
+  startTime_gt: DateTime
+  startTime_gte: DateTime
+  endTime: DateTime
+  endTime_not: DateTime
+  endTime_in: [DateTime!]
+  endTime_not_in: [DateTime!]
+  endTime_lt: DateTime
+  endTime_lte: DateTime
+  endTime_gt: DateTime
+  endTime_gte: DateTime
+  AND: [EventWhereInput!]
+  OR: [EventWhereInput!]
+  NOT: [EventWhereInput!]
+}
+
+input EventWhereUniqueInput {
+  id: ID
+  url: String
 }
 
 type Ingredient {
@@ -118,13 +307,92 @@ input IngredientWhereUniqueInput {
 
 scalar Long
 
+type Meal {
+  id: ID!
+}
+
+type MealConnection {
+  pageInfo: PageInfo!
+  edges: [MealEdge]!
+  aggregate: AggregateMeal!
+}
+
+input MealCreateInput {
+  id: ID
+}
+
+type MealEdge {
+  node: Meal!
+  cursor: String!
+}
+
+enum MealOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type MealPreviousValues {
+  id: ID!
+}
+
+type MealSubscriptionPayload {
+  mutation: MutationType!
+  node: Meal
+  updatedFields: [String!]
+  previousValues: MealPreviousValues
+}
+
+input MealSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MealWhereInput
+  AND: [MealSubscriptionWhereInput!]
+  OR: [MealSubscriptionWhereInput!]
+  NOT: [MealSubscriptionWhereInput!]
+}
+
+input MealWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  AND: [MealWhereInput!]
+  OR: [MealWhereInput!]
+  NOT: [MealWhereInput!]
+}
+
+input MealWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
+  createEvent(data: EventCreateInput!): Event!
+  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
+  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  deleteEvent(where: EventWhereUniqueInput!): Event
+  deleteManyEvents(where: EventWhereInput): BatchPayload!
   createIngredient(data: IngredientCreateInput!): Ingredient!
   updateIngredient(data: IngredientUpdateInput!, where: IngredientWhereUniqueInput!): Ingredient
   updateManyIngredients(data: IngredientUpdateManyMutationInput!, where: IngredientWhereInput): BatchPayload!
   upsertIngredient(where: IngredientWhereUniqueInput!, create: IngredientCreateInput!, update: IngredientUpdateInput!): Ingredient!
   deleteIngredient(where: IngredientWhereUniqueInput!): Ingredient
   deleteManyIngredients(where: IngredientWhereInput): BatchPayload!
+  createMeal(data: MealCreateInput!): Meal!
+  deleteMeal(where: MealWhereUniqueInput!): Meal
+  deleteManyMeals(where: MealWhereInput): BatchPayload!
   createRecipe(data: RecipeCreateInput!): Recipe!
   updateRecipe(data: RecipeUpdateInput!, where: RecipeWhereUniqueInput!): Recipe
   updateManyRecipes(data: RecipeUpdateManyMutationInput!, where: RecipeWhereInput): BatchPayload!
@@ -157,9 +425,15 @@ type PageInfo {
 }
 
 type Query {
+  event(where: EventWhereUniqueInput!): Event
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
+  eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
   ingredient(where: IngredientWhereUniqueInput!): Ingredient
   ingredients(where: IngredientWhereInput, orderBy: IngredientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Ingredient]!
   ingredientsConnection(where: IngredientWhereInput, orderBy: IngredientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): IngredientConnection!
+  meal(where: MealWhereUniqueInput!): Meal
+  meals(where: MealWhereInput, orderBy: MealOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Meal]!
+  mealsConnection(where: MealWhereInput, orderBy: MealOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MealConnection!
   recipe(where: RecipeWhereUniqueInput!): Recipe
   recipes(where: RecipeWhereInput, orderBy: RecipeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recipe]!
   recipesConnection(where: RecipeWhereInput, orderBy: RecipeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecipeConnection!
@@ -173,6 +447,7 @@ type Recipe {
   id: ID!
   name: String!
   url: String!
+  type: String!
 }
 
 type RecipeConnection {
@@ -185,6 +460,7 @@ input RecipeCreateInput {
   id: ID
   name: String!
   url: String!
+  type: String!
 }
 
 type RecipeEdge {
@@ -199,12 +475,15 @@ enum RecipeOrderByInput {
   name_DESC
   url_ASC
   url_DESC
+  type_ASC
+  type_DESC
 }
 
 type RecipePreviousValues {
   id: ID!
   name: String!
   url: String!
+  type: String!
 }
 
 type RecipeSubscriptionPayload {
@@ -228,11 +507,13 @@ input RecipeSubscriptionWhereInput {
 input RecipeUpdateInput {
   name: String
   url: String
+  type: String
 }
 
 input RecipeUpdateManyMutationInput {
   name: String
   url: String
+  type: String
 }
 
 input RecipeWhereInput {
@@ -278,6 +559,20 @@ input RecipeWhereInput {
   url_not_starts_with: String
   url_ends_with: String
   url_not_ends_with: String
+  type: String
+  type_not: String
+  type_in: [String!]
+  type_not_in: [String!]
+  type_lt: String
+  type_lte: String
+  type_gt: String
+  type_gte: String
+  type_contains: String
+  type_not_contains: String
+  type_starts_with: String
+  type_not_starts_with: String
+  type_ends_with: String
+  type_not_ends_with: String
   AND: [RecipeWhereInput!]
   OR: [RecipeWhereInput!]
   NOT: [RecipeWhereInput!]
@@ -289,7 +584,9 @@ input RecipeWhereUniqueInput {
 }
 
 type Subscription {
+  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
   ingredient(where: IngredientSubscriptionWhereInput): IngredientSubscriptionPayload
+  meal(where: MealSubscriptionWhereInput): MealSubscriptionPayload
   recipe(where: RecipeSubscriptionWhereInput): RecipeSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }

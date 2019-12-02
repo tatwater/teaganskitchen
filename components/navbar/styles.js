@@ -1,13 +1,21 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 
 export const Container = styled.nav`
+  background: #fff;
+  border-bottom: 1px solid ${({ theme }) => lighten(.05, theme.colors.borderPrimary) };
   display: flex;
     align-items: center;
     justify-content: space-between;
   font-size: 16px;
   height: 96px;
   padding: 0 50px 0 60px;
+  position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+  z-index: 1;
 `;
 export const Home = styled.div`
   display: flex;

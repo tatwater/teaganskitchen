@@ -48,7 +48,7 @@ class UserMenu extends Component {
             <Container>
               { homePath === '/kitchen' &&
                 <LinkGroup>
-                  <Link href=''>
+                  <Link href='/event/new'>
                     <a onClick={() => this.toggleShowMenu() }>
                       <FontAwesomeIcon icon={['far', 'calendar-plus']} />
                       New Event

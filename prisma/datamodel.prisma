@@ -10,4 +10,17 @@ type Recipe {
   id: ID! @id
   name: String!
   url: String! @unique
+  type: String!
+}
+type Meal {
+  id: ID! @id
+}
+type Event {
+  id: ID! @id
+  name: String!
+  url: String! @unique
+  starred: Boolean @default(value: false)
+  description: String!
+  startTime: DateTime!
+  endTime: DateTime!
 }

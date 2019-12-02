@@ -16,7 +16,7 @@ function Navbar({ router: { pathname }, visible, dispatch }) {
   let shortPathname = pathname.split('/')[1];
   let homePath = '/';
 
-  if (shortPathname === 'kitchen' || shortPathname === 'recipe' || shortPathname === 'party')
+  if (shortPathname === 'kitchen' || shortPathname === 'recipe' || shortPathname === 'event')
     homePath = '/kitchen';
   else if (shortPathname === 'yoga')
     homePath = '/yoga';
@@ -52,9 +52,9 @@ function Navbar({ router: { pathname }, visible, dispatch }) {
           <UserMenu homePath={ homePath } />
         }
         { homePath === '/kitchen' &&
-          <Link href='/party'>
-            <A current={ pathname === '/party' }>
-              Dinner Party
+          <Link href='/event/harvest-movie'>
+            <A current={ pathname === '/event/harvest-movie' }>
+              Harvest Dinner & Movie
             </A>
           </Link>
         }
@@ -78,7 +78,7 @@ function Navbar({ router: { pathname }, visible, dispatch }) {
           </Link>
         </SubNav>
       }
-      { (shortPathname === 'kitchen' || shortPathname === 'recipe' || shortPathname === 'party') &&
+      { homePath === '/kitchen' &&
         <SubNav>
           <Link href='/kitchen/mains'>
             <A current={ pathname === '/kitchen/mains' }>
