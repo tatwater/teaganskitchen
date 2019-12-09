@@ -47,39 +47,27 @@ class UserMenu extends Component {
               type='button'
             />
             <Container>
-              { homePath === '/kitchen' &&
-                <LinkGroup>
-                  <Link href='/event/new'>
-                    <a onClick={() => this.toggleShowMenu() }>
-                      <FontAwesomeIcon icon={['far', 'calendar-plus']} />
-                      New Event
-                    </a>
-                  </Link>
-                  <Link href='/recipe/new'>
-                    <a onClick={() => this.toggleShowMenu() }>
-                      <FontAwesomeIcon icon={['far', 'file-plus']} />
-                      New Recipe
-                    </a>
-                  </Link>
-                </LinkGroup>
-              }
-              { homePath === '/yoga' &&
-                <LinkGroup>
-                  <Link href=''>
-                    <a onClick={() => this.toggleShowMenu() }>
-                      <FontAwesomeIcon icon={['far', 'calendar-plus']} />
-                      New Class
-                    </a>
-                  </Link>
-                </LinkGroup>
-              }
+              <LinkGroup>
+                <Link href='/event/new'>
+                  <a onClick={() => this.toggleShowMenu() }>
+                    <FontAwesomeIcon icon={['far', 'calendar-plus']} />
+                    New Event
+                  </a>
+                </Link>
+                <Link href='/recipe/new'>
+                  <a onClick={() => this.toggleShowMenu() }>
+                    <FontAwesomeIcon icon={['far', 'file-plus']} />
+                    New Recipe
+                  </a>
+                </Link>
+              </LinkGroup>
               <Link href=''>
                 <a onClick={() => this.toggleShowMenu() }>
                   <FontAwesomeIcon icon={['far', 'user']} />
                   My profile
                 </a>
               </Link>
-              <Link href='/kitchen/signin'>
+              <Link href='/signin'>
                 <a onClick={() => this.toggleShowMenu() }>
                   <FontAwesomeIcon icon={['far', 'sign-out']} />
                   Sign out

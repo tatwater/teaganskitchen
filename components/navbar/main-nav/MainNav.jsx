@@ -21,21 +21,21 @@ const MainNav = ({ dispatch }) => (
         <FontAwesomeIcon icon={['fal', 'times']} />
       </ToggleButton>
       <Work>
-        <Link href='/'>
+        <Link href='teaganatwater.com'>
           <a onClick={() => dispatch(closeMainNav())}>
             <Title>Work</Title>
           </a>
         </Link>
       </Work>
       <Kitchen>
-        <Link href='/kitchen'>
+        <Link href='/'>
           <a onClick={() => dispatch(closeMainNav())}>
             <Title>Kitchen</Title>
           </a>
         </Link>
       </Kitchen>
       <Yoga>
-        <Link href='/yoga'>
+        <Link href='/'>
           <a onClick={() => dispatch(closeMainNav())}>
             <Title>Yoga</Title>
           </a>

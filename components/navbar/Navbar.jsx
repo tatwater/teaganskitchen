@@ -14,14 +14,6 @@ import { Container, Home, ToggleButton, SubNav, A, Site, Photo } from './styles'
 
 
 function Navbar({ router: { pathname }, isAuth=false, visible, dispatch }) {
-  let shortPathname = pathname.split('/')[1];
-  let homePath = '/';
-
-  if (shortPathname === 'kitchen' || shortPathname === 'recipe' || shortPathname === 'event')
-    homePath = '/kitchen';
-  else if (shortPathname === 'yoga')
-    homePath = '/yoga';
-
   return (
     <Container auth={ isAuth }>
       { visible &&
@@ -35,92 +27,60 @@ function Navbar({ router: { pathname }, isAuth=false, visible, dispatch }) {
         >
           <FontAwesomeIcon icon={['fal', 'bars']} />
         </ToggleButton>
-        <Link href={ homePath }>
+        <Link href='/'>
           <a>
             <Logo color={ isAuth ? '#fff' : theme.colors.textPrimary } />
           </a>
         </Link>
-        { homePath === '/kitchen' &&
-          <Link href='/kitchen'>
-            <Site
-              site={ isAuth ? 'auth' : 'kitchen' }
-            >
-              Kitchen
-            </Site>
-          </Link>
-        }
-        { homePath === '/yoga' &&
-          <Link href='/yoga'>
-            <Site site='yoga'>Yoga</Site>
-          </Link>
-        }
-        { (!isAuth && homePath === '/kitchen' || homePath === '/yoga') &&
-          <UserMenu
-            homePath={ homePath }
-            isAuth={ isAuth }
-          />
-        }
-        { (!isAuth && homePath === '/kitchen') &&
-          <Link href='/event/harvest-movie'>
-            <A current={ pathname === '/event/harvest-movie' }>
-              Harvest Dinner & Movie
-            </A>
-          </Link>
-        }
+        <Link href='/'>
+          <Site
+            site={ isAuth ? 'auth' : 'kitchen' }
+          >
+            Kitchen
+          </Site>
+        </Link>
+        <UserMenu
+          homePath='/'
+          isAuth={ isAuth }
+        />
+        <Link href='/event/harvest-movie'>
+          <A current={ pathname === '/event/harvest-movie' }>
+            Harvest Dinner & Movie
+          </A>
+        </Link>
       </Home>
-      { shortPathname === '' &&
-        <SubNav>
-          <Link href=''>
-            <A>LinkedIn</A>
-          </Link>
-          <Link href=''>
-            <A>AngelList</A>
-          </Link>
-          <Link href=''>
-            <A>GitHub</A>
-          </Link>
-          <Link href=''>
-            <A>Dribbble</A>
-          </Link>
-          <Link href=''>
-            <A>Medium</A>
-          </Link>
-        </SubNav>
-      }
-      { homePath === '/kitchen' &&
-        <SubNav>
-          <Link href='/kitchen/mains'>
-            <A current={ pathname === '/kitchen/mains' }>
-              Mains
-            </A>
-          </Link>
-          <Link href='/kitchen/sides'>
-            <A current={ pathname === '/kitchen/sides' }>
-              Sides
-            </A>
-          </Link>
-          <Link href='/kitchen/bites'>
-            <A current={ pathname === '/kitchen/bites' }>
-              Bites
-            </A>
-          </Link>
-          <Link href='/kitchen/breads'>
-            <A current={ pathname === '/kitchen/breads' }>
-              Breads
-            </A>
-          </Link>
-          <Link href='/kitchen/desserts'>
-            <A current={ pathname === '/kitchen/desserts' }>
-              Desserts
-            </A>
-          </Link>
-          <Link href='/kitchen/drinks'>
-            <A current={ pathname === '/kitchen/drinks' }>
-              Drinks
-            </A>
-          </Link>
-        </SubNav>
-      }
+      <SubNav>
+        <Link href='/mains'>
+          <A current={ pathname === '/mains' }>
+            Mains
+          </A>
+        </Link>
+        <Link href='/sides'>
+          <A current={ pathname === '/sides' }>
+            Sides
+          </A>
+        </Link>
+        <Link href='/bites'>
+          <A current={ pathname === '/bites' }>
+            Bites
+          </A>
+        </Link>
+        <Link href='/breads'>
+          <A current={ pathname === '/breads' }>
+            Breads
+          </A>
+        </Link>
+        <Link href='/desserts'>
+          <A current={ pathname === '/desserts' }>
+            Desserts
+          </A>
+        </Link>
+        <Link href='/drinks'>
+          <A current={ pathname === '/drinks' }>
+            Drinks
+          </A>
+        </Link>
+      </SubNav>
     </Container>
   );
 }
