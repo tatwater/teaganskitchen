@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { theme } from '../../layouts/globalStyle';
 import { openMainNav } from '../../lib/main-nav/actions';
 
 import Logo from './Logo';
@@ -12,7 +13,7 @@ import UserMenu from './user-menu/UserMenu';
 import { Container, Home, ToggleButton, SubNav, A, Site, Photo } from './styles';
 
 
-function Navbar({ router: { pathname }, visible, dispatch }) {
+function Navbar({ router: { pathname }, isAuth=false, visible, dispatch }) {
   let shortPathname = pathname.split('/')[1];
   let homePath = '/';
 
@@ -22,12 +23,13 @@ function Navbar({ router: { pathname }, visible, dispatch }) {
     homePath = '/yoga';
 
   return (
-    <Container>
+    <Container auth={ isAuth }>
       { visible &&
         <MainNav />
       }
       <Home>
         <ToggleButton
+          isAuth={ isAuth }
           onClick={() => dispatch(openMainNav())}
           type='button'
         >
@@ -35,12 +37,16 @@ function Navbar({ router: { pathname }, visible, dispatch }) {
         </ToggleButton>
         <Link href={ homePath }>
           <a>
-            <Logo />
+            <Logo color={ isAuth ? '#fff' : theme.colors.textPrimary } />
           </a>
         </Link>
         { homePath === '/kitchen' &&
           <Link href='/kitchen'>
-            <Site site='kitchen'>Kitchen</Site>
+            <Site
+              site={ isAuth ? 'auth' : 'kitchen' }
+            >
+              Kitchen
+            </Site>
           </Link>
         }
         { homePath === '/yoga' &&
@@ -48,10 +54,13 @@ function Navbar({ router: { pathname }, visible, dispatch }) {
             <Site site='yoga'>Yoga</Site>
           </Link>
         }
-        { (homePath === '/kitchen' || homePath === '/yoga') &&
-          <UserMenu homePath={ homePath } />
+        { (!isAuth && homePath === '/kitchen' || homePath === '/yoga') &&
+          <UserMenu
+            homePath={ homePath }
+            isAuth={ isAuth }
+          />
         }
-        { homePath === '/kitchen' &&
+        { (!isAuth && homePath === '/kitchen') &&
           <Link href='/event/harvest-movie'>
             <A current={ pathname === '/event/harvest-movie' }>
               Harvest Dinner & Movie

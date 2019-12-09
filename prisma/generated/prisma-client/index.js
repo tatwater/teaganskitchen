@@ -17,11 +17,23 @@ var models = [
     embedded: false
   },
   {
+    name: "Time",
+    embedded: false
+  },
+  {
     name: "Meal",
     embedded: false
   },
   {
     name: "Event",
+    embedded: false
+  },
+  {
+    name: "Address",
+    embedded: false
+  },
+  {
+    name: "Guest",
     embedded: false
   }
 ];

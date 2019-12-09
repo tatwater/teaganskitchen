@@ -2,14 +2,17 @@ import styled from 'styled-components';
 
 
 export const Container = styled.section`
+  display: flex;
+    justify-content: center;
   margin: 0 auto;
   max-width: 1400px;
-  padding: 120px 0;
 `;
 export const Track = styled.div`
-  display: flex;
+  display: inline-flex;
     align-items: flex-start;
+    ${({ center }) => center && 'justify-content: center;'}
   margin-top: 60px;
+  position: relative;
 `;
 export const Item = styled.a`
   background: #fff;
@@ -22,16 +25,26 @@ export const Item = styled.a`
     margin-left: 40px;
   }
 `;
+export const Suggest = styled.button`
+  background: ${({ theme }) => theme.colors.linkActive };
+  border-radius: 8px;
+  padding: 8px;
+  position: absolute;
+    top: 0;
+    right: -300px;
+`;
 export const Photo = styled.div`
   background: ${({ theme }) => theme.colors.linkActive };
   border: 2px dashed ${({ theme }) => theme.colors.borderPrimary };
-  border-radius: 8px;
+  border-radius: 6px;
   color: ${({ theme }) => theme.colors.textSecondary };
   display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
   font-size: 16px;
   height: 244px;
+  padding: 24px;
   width: 244px;
 `;
 export const Title = styled.div`

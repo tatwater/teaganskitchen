@@ -6,12 +6,12 @@ import Error from './empty/Error';
 import Loading from './empty/Loading';
 import NoResults from './empty/NoResults';
 
-import { Container, Track, Item, Photo, Title, Description } from './styles';
+import { Container, Track, Item, Suggest, Photo, Title, Description } from './styles';
 
 
 const RECIPES_PER_PAGE = 10;
 
-function RecipeList({ data: { error, recipes, loading }, typeFilters, loadMoreRecipes }) {
+function RecipeList({ data: { error, recipes, loading }, typeFilters, center=false, withSuggestButton=false, loadMoreRecipes }) {
   if (error)
     return (
       <Error>{ console.log(error) }</Error>
@@ -21,8 +21,7 @@ function RecipeList({ data: { error, recipes, loading }, typeFilters, loadMoreRe
 
     return (
       <Container>
-        <h1>All recipes</h1>
-        <Track>
+        <Track center={ center }>
           { recipes.map((recipe, index) => (
             <Link href={`/recipe/${recipe.url}`} key={ recipe.id }>
               <Item>
@@ -32,6 +31,14 @@ function RecipeList({ data: { error, recipes, loading }, typeFilters, loadMoreRe
               </Item>
             </Link>
           ))}
+          { withSuggestButton &&
+            <Suggest type='button'>
+              <Photo>
+                <h4>Suggest a dish</h4>
+                Got something that would make a great addition? Propose it!
+              </Photo>
+            </Suggest>
+          }
           { areMoreRecipes &&
             <button onClick={() => loadMoreRecipes()}>
               { loading ? 'Loading...' : 'Show More' }

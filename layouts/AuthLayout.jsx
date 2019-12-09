@@ -1,20 +1,15 @@
 import Head from 'next/head';
-import styled from 'styled-components';
 
 import { GlobalStyle } from './globalStyle';
 import Navbar from '../components/navbar/Navbar';
 
 
-const Wrapper = styled.div`
-  padding-top: 96px;
-`;
-
-function GlobalLayout({ children }) {
+function AuthLayout({ children }) {
   return (
-    <Wrapper>
+    <div>
       <GlobalStyle />
       <Head>
-        <title>Home</title>
+        <title>Sign in</title>
         <link
           href='/favicon.ico'
           rel='icon'
@@ -22,10 +17,10 @@ function GlobalLayout({ children }) {
         <meta charset='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no' />
       </Head>
-      <Navbar />
+      <Navbar isAuth />
       { children }
-    </Wrapper>
+    </div>
   );
 }
 
-export default GlobalLayout;
+export default AuthLayout;

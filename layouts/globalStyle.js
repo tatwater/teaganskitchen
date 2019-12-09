@@ -31,7 +31,6 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 18px;
     font-weight: 500;
     height: 100vh;
-    padding-top: 96px;
     width: 100vw;
   }
 
@@ -61,6 +60,11 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 22px;
     font-weight: 900;
     margin: 0;
+  }
+  h4 {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 8px;
   }
 
   p {

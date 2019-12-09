@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Container, Name, EditButton, Description } from './styles';
+import { Container, EditButton, Description, Calendar, Time, Details } from './styles';
 
 
 function Header({ router: { asPath }, data: { error, event } }) {
@@ -15,7 +15,15 @@ function Header({ router: { asPath }, data: { error, event } }) {
   if (event)
     return (
       <Container>
-        <Name>{ event.name }</Name>
+        <h1>{ event.name }</h1>
+        <Calendar>
+          <Time>5-10p</Time>
+          <img src='/icon-calendar.svg' />
+          <Details>
+            <h3>November 02, 2019</h3>
+            <p>1110 Route 12A Plainfield NH, 03781</p>
+          </Details>
+        </Calendar>
         <Link href={ '/event/edit/' + event.url }>
           <EditButton>
             <FontAwesomeIcon icon={['fas', 'pencil']} />

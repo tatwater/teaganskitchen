@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 
 
 export const Container = styled.nav`
-  background: #fff;
-  border-bottom: 1px solid ${({ theme }) => lighten(.05, theme.colors.borderPrimary) };
+  background: ${({ auth }) => auth ? 'none' : '#fff' };
+  border-bottom: 1px solid ${({ auth, theme }) => auth ? 'none' : lighten(.05, theme.colors.borderPrimary) };
   display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,6 +29,7 @@ export const Home = styled.div`
 `;
 export const ToggleButton = styled.button`
   border-radius: 50%;
+  color: ${({ isAuth }) => isAuth && '#fff' };
   font-size: 22px;
   height: 40px;
   position: absolute;
@@ -43,13 +44,13 @@ export const ToggleButton = styled.button`
   }
 
   &:hover {
-    background: ${({ theme }) => theme.colors.linkActive };
+    background: ${({ isAuth, theme }) => isAuth ? darken(.025, theme.colors.brandPrimary) : theme.colors.linkActive };
   }
 `;
 export const Site = styled.a`
-  background: ${({ site, theme }) => { switch (site) { case 'kitchen': return theme.colors.green; case 'yoga': return theme.colors.yellow; }}};
+  background: ${({ site, theme }) => { switch (site) { case 'kitchen': return theme.colors.green; case 'yoga': return theme.colors.yellow; case 'auth': return '#fff'; }}};
   border-radius: 3px;
-  color: #fff;
+  color: ${({ site, theme }) => site === 'auth' ? theme.colors.brandPrimary : '#fff' };
   cursor: pointer;
   display: flex;
     align-items: center;

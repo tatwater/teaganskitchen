@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   margin: 0 auto;
   max-width: 1040px;
-  padding: 40px 20px;
+  padding: 60px 20px;
 `;
 export const PetNote = styled.div`
   border: 2px dashed ${({ theme }) => theme.colors.borderPrimary };

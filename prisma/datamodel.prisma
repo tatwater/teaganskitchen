@@ -11,6 +11,14 @@ type Recipe {
   name: String!
   url: String! @unique
   type: String!
+  totalMinutes: Int!
+  times: [Time]
+  ingredients: [Ingredient!]
+}
+type Time {
+  id: ID! @id
+  minutes: Int!
+  type: String!
 }
 type Meal {
   id: ID! @id
@@ -21,6 +29,20 @@ type Event {
   url: String! @unique
   starred: Boolean @default(value: false)
   description: String!
-  startTime: DateTime!
-  endTime: DateTime!
+  startTime: String
+  endTime: String
+  date: DateTime
+  address: Address
+  dishes: [Recipe]
+  allowSuggestedDishes: Boolean @default(value: true)
+  guests: [Guest]
+}
+type Address {
+  id: ID! @id
+  text: String!
+}
+type Guest {
+  id: ID! @id
+  user: User!
+  response: String
 }

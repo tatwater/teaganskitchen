@@ -24,12 +24,13 @@ class UserMenu extends Component {
 
   render() {
     const { showMenu } = this.state;
-    const { homePath } = this.props;
+    const { homePath, isAuth } = this.props;
 
     return (
       <Wrapper>
         <Button
           active={ showMenu }
+          isAuth={ isAuth }
           onClick={() => this.toggleShowMenu() }
           type='button'
         >
@@ -78,7 +79,7 @@ class UserMenu extends Component {
                   My profile
                 </a>
               </Link>
-              <Link href=''>
+              <Link href='/kitchen/signin'>
                 <a onClick={() => this.toggleShowMenu() }>
                   <FontAwesomeIcon icon={['far', 'sign-out']} />
                   Sign out

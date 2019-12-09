@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 
 export const Wrapper = styled.div`
@@ -6,9 +7,11 @@ export const Wrapper = styled.div`
   position: relative;
 `;
 export const Button = styled.button`
-  background: ${({ active, theme }) => active && theme.colors.linkActive };
+  background: ${({ active, isAuth, theme }) => active && (isAuth ? darken(.025, theme.colors.brandPrimary) : theme.colors.linkActive) };
   border-radius: 50%;
+  color: ${({ isAuth }) => isAuth && '#fff' };
   height: 36px;
+  transition: background .1s ease;
   width: 36px;
 
   svg {
@@ -16,7 +19,7 @@ export const Button = styled.button`
   }
 
   &:hover {
-    background: ${({ theme }) => theme.colors.linkActive };
+    background: ${({ isAuth, theme }) => isAuth ? darken(.025, theme.colors.brandPrimary) : theme.colors.linkActive };
   }
 `;
 export const Photo = styled.img`

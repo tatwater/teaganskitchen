@@ -31,7 +31,7 @@ export const CustomSearchBox = styled(SearchBox)`
   height: 46px;
   margin-top: 20px;
   padding: 2px;
-  transition: box-shadow .2s ease;
+  transition: border-color .2s ease, box-shadow .2s ease;
   width: 100%;
 
   form {

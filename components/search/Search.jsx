@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InstantSearch, Hits, SearchBox, Pagination, Highlight, ClearRefinements, RefinementList, Configure } from 'react-instantsearch-dom';
+import { InstantSearch, Hits, Pagination, Highlight, ClearRefinements, RefinementList, Configure } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 
 import { Container, Header, CustomSearchBox, Results } from './styles';
@@ -41,7 +41,7 @@ class Search extends Component {
         >
           <Configure hitsPerPage={ 10 } />
           <Header>
-            <h1>Find some noms</h1>
+            <h1>Let's eat</h1>
             <CustomSearchBox />
           </Header>
           <Results>
