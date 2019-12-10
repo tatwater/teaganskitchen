@@ -27,12 +27,12 @@ export const Container = styled.nav`
   display: grid;
     grid-column-gap: 30px;
     grid-row-gap: 30px;
-    grid-template-areas: 'work work linkedin'
-                         'work work github'
-                         'work work dribbble'
-                         'kitchen yoga instagram'
-                         'kitchen yoga spotify'
-                         'kitchen yoga footer';
+    grid-template-areas: 'work kitchen linkedin'
+                         'work kitchen github'
+                         'work kitchen dribbble'
+                         'work kitchen instagram'
+                         'work kitchen spotify'
+                         'work kitchen footer';
     grid-template-columns: 1fr 1fr 330px;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   font-size: 16px;
@@ -70,7 +70,7 @@ export const Work = styled.div`
   border-radius: 20px;
   position: relative;
   grid-area: work;
-  transition: background .2s ease;
+  transition: transform .1s ease-in;
 
   a {
     position: absolute;
@@ -81,15 +81,18 @@ export const Work = styled.div`
   }
 
   &:hover {
-    background: ${({ theme }) => lighten(0.05, theme.colors.brandPrimary) }
+    transform: scale(1.02);
   }
 `;
 export const Kitchen = styled.div`
-  background: ${({ theme }) => lighten(0.15, theme.colors.green) };
+  ${({ src }) => 'background-image: url(' + src + ')'};
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 20px;
   position: relative;
   grid-area: kitchen;
-  transition: background .2s ease;
+  transition: transform .1s ease-in;
 
   a {
     position: absolute;
@@ -100,7 +103,7 @@ export const Kitchen = styled.div`
   }
 
   &:hover {
-    background: ${({ theme }) => lighten(0.05, theme.colors.green) }
+    transform: scale(1.02);
   }
 `;
 export const Yoga = styled.div`
