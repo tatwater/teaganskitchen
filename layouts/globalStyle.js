@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     color: ${({ theme }) => theme.colors.textPrimary };
-    font-family: 'Sofia Pro';
+    font-family: sofia-pro sans-serif;
     font-size: 18px;
     font-weight: 500;
     height: 100vh;
